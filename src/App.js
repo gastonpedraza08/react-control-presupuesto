@@ -1,24 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, Fragment} from 'react';
+import Dashboard from './components/Dashboard';
+import Login from './components/auth/Login';
+import {
+  BrowserRouter as Router,
+  Route
+} from "react-router-dom";
+import UpdateTransaction from './components/UpdateTransaction';
+
+
 
 function App() {
+
+  const [est, setEst] = useState("undefined")
+  
+  
+  
+
+  const logOut = () => {
+    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('user')
+    window.location = 'login'
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Router>
+   
+        <Route exact path="/update/:id">
+          <UpdateTransaction />
+        </Route>
+
+{/* EL ESTADO ES EL QUE REGULA SI ESTA AUTORIZADO AL LOGIN */}
+        <Route path="/dashboard">
+          <Dashboard
+          est={est}
+          setEst={setEst}
+          logOut={logOut}
+          />
+        </Route>
+        <Route path="/login">    
+          <Login 
+          />
+        </Route>
+      </Router>
+    </Fragment>
   );
 }
 
