@@ -7,23 +7,46 @@ const Form = ({tipo, setEstado, comprobarToken}) => {
         const form = e.target.closest('form')
         const email = form.querySelector('#email').value
         const password = form.querySelector('#password').value
-        const baseURL = `http://localhost:4000/api/users/login`
+        
 
-        axios({
-            method: 'post',
-            url: baseURL,
-            credentials: 'include',
-            data: {
-                email,
-                password
-            }
-        }).then(response => {
-            sessionStorage.setItem('token', response.data.token)
-            sessionStorage.setItem('user', JSON.stringify(response.data.user));
-            window.location = 'dashboard'
-        }).catch(err => {
-            alert('invalid credentials')
-        });
+        if(tipo==="signup"){
+            const baseURL = `http://localhost:4000/api/users/signup`
+            const username = form.querySelector('#username').value
+            axios({
+                method: 'post',
+                url: baseURL,
+                credentials: 'include',
+                data: {
+                    email,
+                    password,
+                    username
+                }
+            }).then(response => {
+                sessionStorage.setItem('token', response.data.token)
+                sessionStorage.setItem('user', JSON.stringify(response.data.user));
+                window.location = 'dashboard'
+            }).catch(err => {
+                alert('invalid credentials')
+            });
+
+        }else{
+            const baseURL = `http://localhost:4000/api/users/login`
+            axios({
+                method: 'post',
+                url: baseURL,
+                credentials: 'include',
+                data: {
+                    email,
+                    password
+                }
+            }).then(response => {
+                sessionStorage.setItem('token', response.data.token)
+                sessionStorage.setItem('user', JSON.stringify(response.data.user));
+                window.location = 'dashboard'
+            }).catch(err => {
+                alert('invalid credentials')
+            });
+        }   
     }
 
     return (

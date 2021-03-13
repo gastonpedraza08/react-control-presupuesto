@@ -1,6 +1,7 @@
 import React, {useState, Fragment} from 'react';
 import Dashboard from './components/Dashboard';
 import Login from './components/auth/Login';
+import Signup from './components/auth/Signup';
 import {
   BrowserRouter as Router,
   Route
@@ -41,6 +42,10 @@ function App() {
         </Route>
         <Route path="/login">    
           <Login 
+          />
+        </Route>
+        <Route path="/signup">    
+          <Signup 
           />
         </Route>
       </Router>
