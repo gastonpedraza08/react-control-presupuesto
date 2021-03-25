@@ -5,7 +5,9 @@ Esta aplicacion tiene como finalidad facilitar el control de presupuesto, hacien
 
 Se ejecuta en el puerto 3000 y las rutas de disponibles son:
 
-/login/signup
+/login
+
+/signup
 
 /dashboard
 
